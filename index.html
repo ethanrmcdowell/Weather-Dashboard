@@ -1,27 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
     <title>My Weather Dashboard</title>
 </head>
+
 <body>
-    <header class="pageHead">My Weather Dashboard</header>
+    <header class="pageHead">
+        <h1>My Weather Dashboard</h1>
+    </header>
     <aside class="sidebar">
         <p>Search for a city:</p>
-        <input type="text" id="cityInput"><button id="btnSubmit">+</button>
+        <input type="text" id="city-input"><button id="city-button">+</button>
 
     </aside>
-    <main id="displayWeather">
-        <h1 class="cityName"></h1>
+    <main id="display-weather">
+        <div id="today" class="clearfix">
+            <h1 class="city-name"></h1>
+            <h2 id="today-text"></h2><span id="weather-icon"></span>
+            <p id="current-weather"></p>
+            <p id="current-temp"></p>
+            <p id="current-humidity"></p>
+            <p id="current-wind"></p>
+        </div>
         <div class="weatherbox" id="wb1"></div>
     </main>
 
 
 
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="app.js"></script>
 </body>
+
 </html>
