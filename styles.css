@@ -24,12 +24,15 @@ p {
     background: #f6f5f5;
 }
 
-.weatherbox {
-    margin-top: 40px;
-    margin-left: 40px;
+.weather-box {
+    margin: 40px auto;
     background: #f6f5f5;
-    height: 200px;
-    width: 200px;
+    height: 150px;
+    width: 250px;
+}
+
+.weather-box p {
+    font-size: 0.7rem;
 }
 
 #city-input {
@@ -42,7 +45,7 @@ p {
     background: #f8efd4;
 }
 
-#today {
+#wb0 {
     width: 95%;
     height: 200px;
     margin: 10px auto;
