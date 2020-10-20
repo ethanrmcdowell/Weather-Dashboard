@@ -98,6 +98,7 @@ async function displayWeather() {
             console.log(response);
             $("#uv-text").text("UV Index: ")
             $("#current-uv").text(response.value);
+            $("#current-uv").removeClass("uv-low uv-moderate uv-high uv-vhigh uv-extreme");
             if (response.value <= 2.99){
                 $("#current-uv").addClass("uv-low");
             } else if (response.value >= 3 && response.value <=5.99){
