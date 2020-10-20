@@ -1,5 +1,17 @@
+a {
+    color: #335d2d;
+}
+
+body {
+    font-family: 'Barlow', sans-serif;
+}
+
+button {
+    margin-left: 1px;
+}
+
 p {
-    line-height: 0.3;
+    line-height: 0.2;
 }
 
 .city-list {
@@ -17,32 +29,80 @@ p {
     clear: both;
 }
 
-.date {
-    margin-top: 25px;
+.current {
+    line-height: 20px;
 }
 
-.fa-2x {
-    margin-left: 50px;
+.date {
+    margin-top: 25px;
+    font-weight: bold;
+}
+
+.fab {
+    margin: 8px 10px 0 0;
+    text-align: center;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background: #99b898;
+    text-align: center;
+    border-top: solid 1px #3b3b3b;
+    border-bottom: solid 1px #3b3b3b;
 }
 
 .pageHead {
-    margin: auto;
+    margin: 5px auto 15px auto;
     text-align: center;
+    border: 1px solid black;
+    width: 450px;
+    background: #99b898;
 }
 
 .sidebar {
     padding: 10px 0 0 25px;
     float: left;
-    width: 18%;
-    height: 600px;
-    background: #f6f5f5;
+    width: 12%;
+    height: 450px;
+    background: #99b898;
+    border: solid 1px black;
+    border-left: 0;
+}
+
+.uv-low {
+    background: #7ea04d;
+}
+
+.uv-moderate {
+    background: #f39233;
+}
+
+.uv-high {
+    background: #ea5455;
+}
+
+.uv-vhigh {
+    background: #c060a1;
+}
+
+.uv-extreme {
+    background: #66bfbf;
+}
+
+.uv-div {
+    margin-top: 0;
 }
 
 .weather-box {
     margin: 40px auto;
-    background: #f6f5f5;
+    background: #99b898;
     height: 225px;
     width: 250px;
+    border: solid 1px black;
 }
 
 .weather-box p {
@@ -53,10 +113,26 @@ p {
     width: 100px;
 }
 
+#current-uv {
+    padding: 3px;
+    border: solid 1px black;
+    border-radius: 10px;
+    color: white;
+}
+
 #display-weather {
     float: right;
-    width: 80%;
-    background: #f8efd4;
+    width: 84%;
+    border: 1px solid black;
+    padding: 0 0 25px 0;
+    margin-left: 2%;
+    margin-right: 2%;
+    background: #99b898;
+}
+
+#today {
+    margin-left: 10px;
+    margin-top: 5px;
 }
 
 #wb0 {
@@ -68,4 +144,8 @@ p {
 
 #weather-icon, #today-text {
     display: inline;
+}
+
+a:hover {
+    color: #557571;
 }

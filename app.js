@@ -96,7 +96,19 @@ async function displayWeather() {
             method: "GET"
         }).then(function(response){
             console.log(response);
-            $("#current-uv").text("UV Index: " + response.value);
+            $("#uv-text").text("UV Index: ")
+            $("#current-uv").text(response.value);
+            if (response.value <= 2.99){
+                $("#current-uv").addClass("uv-low");
+            } else if (response.value >= 3 && response.value <=5.99){
+                $("#current-uv").addClass("uv-moderate");
+            } else if (response.value >= 6 && response.value <= 7.99){
+                $("#current-uv").addClass("uv-high");
+            } else if (response.value >= 8 && response.value <= 10){
+                $("#current-uv").addClass("uv-vhigh");
+            } else {
+                $("#current-uv").addClass("uv-extreme");
+            }
         })
         // A FOR DAY 1 WEATHER
         $("#date1").text(moment().add(1, "days").format("LL"));
