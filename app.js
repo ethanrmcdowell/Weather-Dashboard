@@ -1,12 +1,17 @@
+// GLOBAL VARIABLES
 var cityName;
 var citiesList = [];
 
+// SHOWS CURRENT DATE AT THE TOP OF THE CURRENT WEATHER DIV
 $("#date0").text(moment().format("dddd" + ", " + "LL"));
 
+// FUNCTIONS TO RUN ON PAGE LOAD
 reloadWeather();
 showList();
 
 // EVENT LISTENENER FOR SUBMIT BUTTON
+// ALERTS IF SUBMIT PRESSED W/O ANY DATA
+// IF MORE THAN 5 CITIES IN LIST, DELETES LAST ONE
 $("#city-button").click(function (event) {
     event.preventDefault();
     cityName = $("#city-input").val().trim();
@@ -26,8 +31,15 @@ $("#city-button").click(function (event) {
     }
 });
 
+// SIMULATES CLICKING THE SUBMIT BUTTON IF USER PRESSES ENTER
+$("#city-input").keypress(function (e) {
+    if (e.which == 13) {
+        $("#city-button").click();
+    }
+})
+
 // EVENT LISTENER FOR LIST OF PREV SEARCHED CITIES, CHANGES TO SHOW WEATHER FOR CLICKED CITY
-$(".city-list").click(function() {
+$(".city-list").click(function () {
     cityName = $(this).attr("data-name");
     displayWeather()
     console.log(cityName);
@@ -88,24 +100,27 @@ async function displayWeather() {
         $("#current-temp").text("Temperature: " + response.list[0].main.temp + "°F");
         $("#current-humidity").text("Humidity: " + response.list[0].main.temp + "%");
         $("#current-wind").text("Wind Speed: " + response.list[0].wind.speed + " MPH");
+        // VARIABLES FOR UV AJAX CALL
         var latitude = response.city.coord.lat;
         var longitude = response.city.coord.lon;
-        var uvurl = "https://api.openweathermap.org/data/2.5/uvi?lat="+ latitude +"&lon="+ longitude +"&appid=9f9caf703d8d509f42ad240169e9fa5a";
+        var uvurl = "https://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&appid=9f9caf703d8d509f42ad240169e9fa5a";
+        // OPENWEATHER API CALL FOR UV INDEX, ADDS CLASS TO INDEX TEXT BASED ON VALUE FOR
+        // UV INDICES OF LOW, MODERATE, HIGH, VERY HIGH, AND EXTREME
         $.ajax({
             url: uvurl,
             method: "GET"
-        }).then(function(response){
+        }).then(function (response) {
             console.log(response);
             $("#uv-text").text("UV Index: ")
             $("#current-uv").text(response.value);
             $("#current-uv").removeClass("uv-low uv-moderate uv-high uv-vhigh uv-extreme");
-            if (response.value <= 2.99){
+            if (response.value <= 2.99) {
                 $("#current-uv").addClass("uv-low");
-            } else if (response.value >= 3 && response.value <=5.99){
+            } else if (response.value >= 3 && response.value <= 5.99) {
                 $("#current-uv").addClass("uv-moderate");
-            } else if (response.value >= 6 && response.value <= 7.99){
+            } else if (response.value >= 6 && response.value <= 7.99) {
                 $("#current-uv").addClass("uv-high");
-            } else if (response.value >= 8 && response.value <= 10){
+            } else if (response.value >= 8 && response.value <= 10) {
                 $("#current-uv").addClass("uv-vhigh");
             } else {
                 $("#current-uv").addClass("uv-extreme");

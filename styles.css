@@ -17,6 +17,7 @@ p {
 
 .city-list {
     display: block;
+    text-transform: capitalize;
     border: solid 1px black;
     margin: 10px 5px 0 5px;
     width: 175px;
@@ -57,7 +58,7 @@ p {
 }
 
 .page-head {
-    margin: 5px auto 15px auto;
+    margin: 15px auto 15px auto;
     text-align: center;
     border: 1px solid black;
     width: 450px;
@@ -77,22 +78,32 @@ p {
 
 .uv-low {
     background: #7ea04d;
+    border: solid 1px black;
+    border-radius: 10px;
 }
 
 .uv-moderate {
     background: #f39233;
+    border: solid 1px black;
+    border-radius: 10px;
 }
 
 .uv-high {
     background: #ea5455;
+    border: solid 1px black;
+    border-radius: 10px;
 }
 
 .uv-vhigh {
     background: #c060a1;
+    border: solid 1px black;
+    border-radius: 10px;
 }
 
 .uv-extreme {
     background: #66bfbf;
+    border: solid 1px black;
+    border-radius: 10px;
 }
 
 .uv-div {
@@ -117,8 +128,6 @@ p {
 
 #current-uv {
     padding: 3px;
-    border: solid 1px black;
-    border-radius: 10px;
     color: white;
 }
 
@@ -127,8 +136,8 @@ p {
     width: 51%;
     border: 1px solid black;
     padding: 0 0 25px 0;
-    margin-left: 6%;
-    margin-right: 18%;
+    margin-left: 4%;
+    margin-right: 20%;
     background: #99b898;
 }
 
