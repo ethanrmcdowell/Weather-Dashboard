@@ -10,9 +10,9 @@ showList();
 $("#city-button").click(function (event) {
     event.preventDefault();
     cityName = $("#city-input").val().trim();
-    if (cityName === ""){
+    if (cityName === "") {
         alert("Please enter a city.");
-    } else if(citiesList.length >= 5){
+    } else if (citiesList.length >= 5) {
         citiesList.shift();
         citiesList.push(cityName);
         saveCities();
@@ -26,11 +26,18 @@ $("#city-button").click(function (event) {
     }
 });
 
+// EVENT LISTENER FOR LIST OF PREV SEARCHED CITIES, CHANGES TO SHOW WEATHER FOR CLICKED CITY
+$(".city-list").click(function() {
+    cityName = $(this).attr("data-name");
+    displayWeather()
+    console.log(cityName);
+})
+
 // FUNCTION TO BUILD A LIST OF PREVIOUSLY SEARCHED CITIES
-function showCities(){
+function showCities() {
     $("#city-list").empty();
     $("#city-input").val("");
-    for (i=0; i<citiesList.length; i++){
+    for (i = 0; i < citiesList.length; i++) {
         var item = $("<a>");
         item.addClass("city-list");
         item.attr("data-name", citiesList[i]);
@@ -41,34 +48,34 @@ function showCities(){
 
 // FUNCTION TO PULL THE LAST 5 SEARCHED CITIES FROM LOCAL STORAGE
 // THEN RUN PREVIOUS FUNCTION WITH THIS DATA
-function showList(){
+function showList() {
     var storedCities = JSON.parse(localStorage.getItem("citiesList"));
-    if (storedCities !== null){
+    if (storedCities !== null) {
         citiesList = storedCities;
     }
     showCities();
 }
 
 // SAVES THE CURRENT CITY AS WELL AS AN ARRAY OF THE LAST 5 CITIES YOU SEARCHED FOR INTO LOCAL STORAGE
-function saveCities(){
+function saveCities() {
     localStorage.setItem("currentCity", JSON.stringify(cityName));
     localStorage.setItem("citiesList", JSON.stringify(citiesList));
 }
 
 // IF YOU PREVIOUSLY SEARCHED FOR YOUR CITY, IT WILL GET THAT FROM LOCAL STORAGE UPON PAGE LOAD/RELOAD
-function reloadWeather(){
+function reloadWeather() {
     var storedWeather = localStorage.getItem("currentCity");
-    if (storedWeather !==  null){
+    if (storedWeather !== null) {
         cityName = JSON.parse(storedWeather);
         displayWeather();
     }
 }
 
 // MAIN FUNCTION FOR FILLING OUT CURRENT WEATHER DATA & 5-DAY FORECAST
-function displayWeather() {
-        // OPENWEATHER API CALL
+async function displayWeather() {
+    // OPENWEATHER FORECAST API CALL
     var openWeather = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=9f9caf703d8d509f42ad240169e9fa5a";
-    $.ajax({
+    await $.ajax({
         url: openWeather,
         method: "GET"
     }).then(function (response) {
@@ -79,8 +86,18 @@ function displayWeather() {
         $("#weather-icon0").attr("src", icon);
         $("#current-weather").text(response.list[0].weather[0].main);
         $("#current-temp").text("Temperature: " + response.list[0].main.temp + "°F");
-        $("current-humidity").text("Humidity: " + response.list[0].main.temp + "%");
-        $("current-wind").text("Wind Speed: " + response.list[0].wind.speed + " MPH");
+        $("#current-humidity").text("Humidity: " + response.list[0].main.temp + "%");
+        $("#current-wind").text("Wind Speed: " + response.list[0].wind.speed + " MPH");
+        var latitude = response.city.coord.lat;
+        var longitude = response.city.coord.lon;
+        var uvurl = "http://api.openweathermap.org/data/2.5/uvi?lat="+ latitude +"&lon="+ longitude +"&appid=9f9caf703d8d509f42ad240169e9fa5a";
+        $.ajax({
+            url: uvurl,
+            method: "GET"
+        }).then(function(response){
+            console.log(response);
+            $("#current-uv").text("UV Index: " + response.value);
+        })
         // A FOR DAY 1 WEATHER
         $("#date1").text(moment().add(1, "days").format("LL"));
         var icon = ("https://openweathermap.org/img/wn/" + response.list[4].weather[0].icon + "@2x.png");
