@@ -9,6 +9,7 @@ $("#date4").text(moment().add(4, "days").format("LL"));
 $("#date5").text(moment().add(5, "days").format("LL"));
 
 reloadWeather();
+showList();
 
 // EVENT LISTENENER FOR SUBMIT BUTTON
 $("#city-button").click(function (event) {
@@ -21,18 +22,42 @@ $("#city-button").click(function (event) {
         citiesList.push(cityName);
         saveCities();
         displayWeather();
+        showList();
     } else {
         citiesList.push(cityName);
         saveCities();
         displayWeather();
+        showList();
     }
 });
 
+function showCities(){
+    $("#city-list").empty();
+    $("#city-input").val("");
+    for (i=0; i<citiesList.length; i++){
+        var item = $("<a><br>");
+        item.addClass("city-list");
+        item.attr("data-name", citiesList[i]);
+        item.text(citiesList[i]);
+        $("#city-list").prepend(item);
+    }
+}
+
+function showList(){
+    var storedCities = JSON.parse(localStorage.getItem("citiesList"));
+    if (storedCities !== null){
+        citiesList = storedCities;
+    }
+    showCities();
+}
+
+// SAVES THE CURRENT CITY AS WELL AS AN ARRAY OF THE LAST 5 CITIES YOU SEARCHED FOR INTO LOCAL STORAGE
 function saveCities(){
     localStorage.setItem("currentCity", JSON.stringify(cityName));
     localStorage.setItem("citiesList", JSON.stringify(citiesList));
 }
 
+// IF YOU PREVIOUSLY SEARCHED FOR YOUR CITY, IT WILL GET THAT FROM LOCAL STORAGE UPON PAGE LOAD/RELOAD
 function reloadWeather(){
     var storedWeather = localStorage.getItem("currentCity");
     if (storedWeather !==  null){
@@ -41,7 +66,9 @@ function reloadWeather(){
     }
 }
 
+// MAIN FUNCTION FOR FILLING OUT CURRENT WEATHER DATA & 5-DAY FORECAST
 function displayWeather() {
+        // OPENWEATHER API CALL
     var openWeather = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=9f9caf703d8d509f42ad240169e9fa5a";
     $.ajax({
         url: openWeather,
