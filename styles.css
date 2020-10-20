@@ -56,7 +56,7 @@ p {
     border-bottom: solid 1px #3b3b3b;
 }
 
-.pageHead {
+.page-head {
     margin: 5px auto 15px auto;
     text-align: center;
     border: 1px solid black;
@@ -152,3 +152,30 @@ a:hover {
     color: #557571;
     text-decoration: none;
 }
+
+@media only screen and (max-width: 800px) {
+    #display-weather {
+        float: none;
+        width: 90%;
+        margin-left: 6%;
+    }
+
+    .sidebar {
+        float: none;
+        width: 90%;
+        margin-left: 6%;
+        border-left: 1px solid black;
+        height: flex;
+        margin-bottom: 10px;
+    }
+
+    .page-head {
+        width: 90%;
+        margin-left: 6%;
+        margin-right: 2%;
+    }
+
+    .page-head h1 {
+        font-size: 25px;
+    }
+  }
