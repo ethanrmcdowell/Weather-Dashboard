@@ -90,7 +90,7 @@ async function displayWeather() {
         $("#current-wind").text("Wind Speed: " + response.list[0].wind.speed + " MPH");
         var latitude = response.city.coord.lat;
         var longitude = response.city.coord.lon;
-        var uvurl = "http://api.openweathermap.org/data/2.5/uvi?lat="+ latitude +"&lon="+ longitude +"&appid=9f9caf703d8d509f42ad240169e9fa5a";
+        var uvurl = "https://api.openweathermap.org/data/2.5/uvi?lat="+ latitude +"&lon="+ longitude +"&appid=9f9caf703d8d509f42ad240169e9fa5a";
         $.ajax({
             url: uvurl,
             method: "GET"
