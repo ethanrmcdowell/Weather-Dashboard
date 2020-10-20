@@ -6,7 +6,11 @@ p {
     content: "";
     display: table;
     clear: both;
-    }
+}
+
+.date {
+    margin-top: 25px;
+}
 
 .fa-2x {
     margin-left: 50px;
@@ -18,8 +22,9 @@ p {
 }
 
 .sidebar {
+    padding: 10px 0 0 25px;
     float: left;
-    width: 20%;
+    width: 18%;
     height: 600px;
     background: #f6f5f5;
 }
@@ -27,7 +32,7 @@ p {
 .weather-box {
     margin: 40px auto;
     background: #f6f5f5;
-    height: 150px;
+    height: 225px;
     width: 250px;
 }
 

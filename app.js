@@ -1,12 +1,45 @@
 var cityName;
-var owapikey = "9f9caf703d8d509f42ad240169e9fa5a";
+var citiesList = [];
 
-$("#today-text").text(moment().format("dddd" + ", " + "LL"));
+$("#date0").text(moment().format("dddd" + ", " + "LL"));
+$("#date1").text(moment().add(1, "days").format("LL"));
+$("#date2").text(moment().add(2, "days").format("LL"));
+$("#date3").text(moment().add(3, "days").format("LL"));
+$("#date4").text(moment().add(4, "days").format("LL"));
+$("#date5").text(moment().add(5, "days").format("LL"));
 
-$("#city-button").click(function () {
-    cityName = $("#city-input").val();
-    displayWeather(cityName);
-})
+reloadWeather();
+
+// EVENT LISTENENER FOR SUBMIT BUTTON
+$("#city-button").click(function (event) {
+    event.preventDefault();
+    cityName = $("#city-input").val().trim();
+    if (cityName === ""){
+        alert("Please enter a city.");
+    } else if(citiesList.length >= 5){
+        citiesList.shift();
+        citiesList.push(cityName);
+        saveCities();
+        displayWeather();
+    } else {
+        citiesList.push(cityName);
+        saveCities();
+        displayWeather();
+    }
+});
+
+function saveCities(){
+    localStorage.setItem("currentCity", JSON.stringify(cityName));
+    localStorage.setItem("citiesList", JSON.stringify(citiesList));
+}
+
+function reloadWeather(){
+    var storedWeather = localStorage.getItem("currentCity");
+    if (storedWeather !==  null){
+        cityName = JSON.parse(storedWeather);
+        displayWeather();
+    }
+}
 
 function displayWeather() {
     var openWeather = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=9f9caf703d8d509f42ad240169e9fa5a";
