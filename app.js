@@ -2,11 +2,6 @@ var cityName;
 var citiesList = [];
 
 $("#date0").text(moment().format("dddd" + ", " + "LL"));
-$("#date1").text(moment().add(1, "days").format("LL"));
-$("#date2").text(moment().add(2, "days").format("LL"));
-$("#date3").text(moment().add(3, "days").format("LL"));
-$("#date4").text(moment().add(4, "days").format("LL"));
-$("#date5").text(moment().add(5, "days").format("LL"));
 
 reloadWeather();
 showList();
@@ -31,11 +26,12 @@ $("#city-button").click(function (event) {
     }
 });
 
+// FUNCTION TO BUILD A LIST OF PREVIOUSLY SEARCHED CITIES
 function showCities(){
     $("#city-list").empty();
     $("#city-input").val("");
     for (i=0; i<citiesList.length; i++){
-        var item = $("<a><br>");
+        var item = $("<a>");
         item.addClass("city-list");
         item.attr("data-name", citiesList[i]);
         item.text(citiesList[i]);
@@ -43,6 +39,8 @@ function showCities(){
     }
 }
 
+// FUNCTION TO PULL THE LAST 5 SEARCHED CITIES FROM LOCAL STORAGE
+// THEN RUN PREVIOUS FUNCTION WITH THIS DATA
 function showList(){
     var storedCities = JSON.parse(localStorage.getItem("citiesList"));
     if (storedCities !== null){
@@ -84,6 +82,7 @@ function displayWeather() {
         $("current-humidity").text("Humidity: " + response.list[0].main.temp + "%");
         $("current-wind").text("Wind Speed: " + response.list[0].wind.speed + " MPH");
         // A FOR DAY 1 WEATHER
+        $("#date1").text(moment().add(1, "days").format("LL"));
         var icon = ("https://openweathermap.org/img/wn/" + response.list[4].weather[0].icon + "@2x.png");
         $("#weather-icon1").attr("src", icon);
         $("#current-weather").text(response.list[4].weather[0].main);
@@ -91,6 +90,7 @@ function displayWeather() {
         $("#temp1").text("Temp: " + response.list[4].main.temp + "°F");
         $("#humidity1").text("Humidity: " + response.list[4].main.temp + "%");
         // PULLS DATA FOR DAY 2 WEATHER
+        $("#date2").text(moment().add(2, "days").format("LL"));
         var icon = ("https://openweathermap.org/img/wn/" + response.list[12].weather[0].icon + "@2x.png");
         $("#weather-icon2").attr("src", icon);
         $("#current-weather").text(response.list[12].weather[0].main);
@@ -98,6 +98,7 @@ function displayWeather() {
         $("#temp2").text("Temp: " + response.list[12].main.temp + "°F");
         $("#humidity2").text("Humidity: " + response.list[12].main.temp + "%");
         // PULLS DATA FOR DAY 3 WEATHER
+        $("#date3").text(moment().add(3, "days").format("LL"));
         var icon = ("https://openweathermap.org/img/wn/" + response.list[20].weather[0].icon + "@2x.png");
         $("#weather-icon3").attr("src", icon);
         $("#current-weather").text(response.list[20].weather[0].main);
@@ -105,6 +106,7 @@ function displayWeather() {
         $("#temp3").text("Temp: " + response.list[20].main.temp + "°F");
         $("#humidity3").text("Humidity: " + response.list[20].main.temp + "%");
         // PULLS DATA FOR DAY 4 WEATHER
+        $("#date4").text(moment().add(4, "days").format("LL"));
         var icon = ("https://openweathermap.org/img/wn/" + response.list[28].weather[0].icon + "@2x.png");
         $("#weather-icon4").attr("src", icon);
         $("#current-weather").text(response.list[28].weather[0].main);
@@ -112,6 +114,7 @@ function displayWeather() {
         $("#temp4").text("Temp: " + response.list[28].main.temp + "°F");
         $("#humidity4").text("Humidity: " + response.list[28].main.temp + "%");
         // PULLS DATA FOR DAY 5 WEATHER
+        $("#date5").text(moment().add(5, "days").format("LL"));
         var icon = ("https://openweathermap.org/img/wn/" + response.list[36].weather[0].icon + "@2x.png");
         $("#weather-icon5").attr("src", icon);
         $("#current-weather").text(response.list[36].weather[0].main);
